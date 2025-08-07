@@ -1,0 +1,193 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Gaming-inspired design system with neon cyberpunk aesthetics */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&family=Space+Grotesk:wght@400;600;700&display=swap');
+
+@layer base {
+  :root {
+    /* Gaming Cyberpunk Color Palette */
+    --background: 240 10% 8%;
+    --foreground: 300 100% 95%;
+
+    --card: 240 8% 12%;
+    --card-foreground: 300 100% 95%;
+
+    --popover: 240 8% 12%;
+    --popover-foreground: 300 100% 95%;
+
+    /* Neon Purple Primary */
+    --primary: 280 100% 65%;
+    --primary-foreground: 240 10% 8%;
+    --primary-glow: 280 100% 75%;
+
+    /* Electric Blue Secondary */
+    --secondary: 200 100% 60%;
+    --secondary-foreground: 240 10% 8%;
+    --secondary-glow: 200 100% 70%;
+
+    /* Hot Pink Accent */
+    --accent: 320 100% 65%;
+    --accent-foreground: 240 10% 8%;
+    --accent-glow: 320 100% 75%;
+
+    /* Muted Gaming Colors */
+    --muted: 240 5% 20%;
+    --muted-foreground: 240 10% 65%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 300 100% 95%;
+
+    --border: 240 5% 25%;
+    --input: 240 5% 15%;
+    --ring: 280 100% 65%;
+
+    --radius: 0.75rem;
+
+    /* Gaming Gradients */
+    --gradient-neon: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+    --gradient-cyber: linear-gradient(45deg, hsl(var(--secondary)), hsl(var(--primary)), hsl(var(--accent)));
+    --gradient-card: linear-gradient(145deg, hsl(var(--card)), hsl(240 8% 15%));
+    --gradient-glow: radial-gradient(circle at center, hsl(var(--primary-glow) / 0.3), transparent 70%);
+
+    /* Glitch Effects */
+    --glitch-primary: hsl(var(--primary));
+    --glitch-secondary: hsl(var(--secondary));
+    --glitch-accent: hsl(var(--accent));
+
+    /* Shadows & Glows */
+    --shadow-neon: 0 0 20px hsl(var(--primary) / 0.5), 0 0 40px hsl(var(--primary) / 0.3);
+    --shadow-cyber: 0 0 30px hsl(var(--secondary) / 0.4), 0 0 60px hsl(var(--secondary) / 0.2);
+    --shadow-card: 0 8px 32px hsl(240 10% 5% / 0.8);
+
+    /* Animations */
+    --transition-gaming: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+}
+
+/* Gaming Components & Animations */
+@layer components {
+  .neon-glow {
+    filter: drop-shadow(var(--shadow-neon));
+  }
+  
+  .cyber-glow {
+    filter: drop-shadow(var(--shadow-cyber));
+  }
+  
+  .glitch-text {
+    position: relative;
+    animation: glitch 2s infinite;
+  }
+  
+  .glitch-text:before,
+  .glitch-text:after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .glitch-text:before {
+    animation: glitch-1 0.6s infinite;
+    color: var(--glitch-secondary);
+    z-index: -1;
+  }
+  
+  .glitch-text:after {
+    animation: glitch-2 0.6s infinite;
+    color: var(--glitch-accent);
+    z-index: -2;
+  }
+  
+  .fragment-badge {
+    background: var(--gradient-neon);
+    border: 1px solid hsl(var(--primary) / 0.5);
+    box-shadow: var(--shadow-neon);
+    transition: var(--transition-bounce);
+  }
+  
+  .fragment-badge:hover {
+    transform: scale(1.05) rotate(1deg);
+    box-shadow: var(--shadow-cyber);
+  }
+  
+  .cyber-card {
+    background: var(--gradient-card);
+    border: 1px solid hsl(var(--border));
+    box-shadow: var(--shadow-card);
+    backdrop-filter: blur(10px);
+    transition: var(--transition-gaming);
+  }
+  
+  .cyber-card:hover {
+    border-color: hsl(var(--primary) / 0.8);
+    box-shadow: var(--shadow-neon), var(--shadow-card);
+    transform: translateY(-2px);
+  }
+  
+  .neon-button {
+    background: var(--gradient-neon);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    color: hsl(var(--primary-foreground));
+    font-weight: 600;
+    transition: var(--transition-gaming);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .neon-button:before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: var(--gradient-cyber);
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0;
+    transition: var(--transition-gaming);
+  }
+  
+  .neon-button:hover:before {
+    opacity: 1;
+  }
+  
+  .neon-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-cyber);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+} 
